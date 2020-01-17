@@ -10,7 +10,7 @@ public class Singleton<T>:MonoBehaviour where T:MonoBehaviour
     {
         get
         {
-            _instace = (T)FindObjectOfType(typeof(T));
+            //_instace = (T)FindObjectOfType(typeof(T));
             if( _instace == null)
             {
                 GameObject go = new GameObject();
