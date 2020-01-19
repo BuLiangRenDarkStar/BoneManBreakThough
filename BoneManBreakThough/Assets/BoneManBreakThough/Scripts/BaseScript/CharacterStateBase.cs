@@ -15,7 +15,10 @@ public class CharacterStateBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        for (int i = 0; i < ListAbilityData.Count; ++i)
+        {
+            ListAbilityData[i].OnEnter(this, animator, stateInfo);
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,7 +28,10 @@ public class CharacterStateBase : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        for (int i = 0; i < ListAbilityData.Count; ++i)
+        {
+            ListAbilityData[i].OnExit(this, animator, stateInfo);
+        }
     }
 
     private CharacterControl characterControl;

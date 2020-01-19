@@ -30,6 +30,15 @@ public class ManualInput : MonoBehaviour
         {
             characterControl.MoveLeft = false;
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            characterControl.Jump = true;
+        }
+        else
+        {
+            characterControl.Jump = false;
+        }
     }
 
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 public enum TransitionParameter
 {
     Move,
+    Jump,
+    ForceTransition,
 }
 
 

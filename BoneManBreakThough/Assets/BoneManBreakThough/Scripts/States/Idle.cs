@@ -13,12 +13,19 @@ public class Idle : StateData
 
     public override void UpdateAbility(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
     {
-        if (VirtualInputManager.Instance.MoveLeft)
+        CharacterControl characterControl = characterStateBase.GetCharacterControl( animator );
+
+        if (characterControl.Jump)
+        {
+            animator.SetBool(TransitionParameter.Jump.ToString(), true);
+        }
+
+        if (characterControl.MoveLeft)
         {
             animator.SetBool(TransitionParameter.Move.ToString(), true);
         }
 
-        if (VirtualInputManager.Instance.MoveRight)
+        if (characterControl.MoveRight)
         {
             animator.SetBool(TransitionParameter.Move.ToString(), true);
         }
