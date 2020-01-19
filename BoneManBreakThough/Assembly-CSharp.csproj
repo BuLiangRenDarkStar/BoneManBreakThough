@@ -63,9 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BoneManBreakThough\Scripts\BaseScript\CharacterStateBase.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\CharacterControl.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\KeyboardInput.cs" />
+    <Compile Include="Assets\BoneManBreakThough\Scripts\ManualInput.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\Singleton.cs" />
+    <Compile Include="Assets\BoneManBreakThough\Scripts\States\Idle.cs" />
+    <Compile Include="Assets\BoneManBreakThough\Scripts\States\MoveForward.cs" />
+    <Compile Include="Assets\BoneManBreakThough\Scripts\States\StateData.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\VirtualInputManager.cs" />
     <Compile Include="Assets\BOXOPHOBIC\Utils\PropertyDrawers\BCategoryAttribute.cs" />
     <Compile Include="Assets\BOXOPHOBIC\Utils\PropertyDrawers\BInteractiveAttribute.cs" />

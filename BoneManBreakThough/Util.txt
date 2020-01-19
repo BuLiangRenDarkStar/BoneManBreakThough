@@ -1,0 +1,4 @@
+0~39 
+40~57 jumping
+
+58~100 landing
