@@ -1,4 +1,4 @@
-0~39 
-40~57 jumping
+0~39 prep
+40~53 jumping
 
-58~100 landing
+54~100 landing

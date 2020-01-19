@@ -18,7 +18,6 @@ public class CharacterStateBase : StateMachineBehaviour
         UpdateAll(this, animator);
     }
 
-
     private CharacterControl characterControl;
     public CharacterControl GetCharacterControl( Animator animator)
     {
