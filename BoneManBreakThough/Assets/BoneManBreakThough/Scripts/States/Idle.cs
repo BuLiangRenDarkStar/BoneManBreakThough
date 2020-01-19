@@ -6,7 +6,12 @@ using UnityEngine;
 [CreateAssetMenu( fileName = "New State", menuName = "Roundbeargames/AbilityData/Idle") ]
 public class Idle : StateData
 {
-    public override void UpdateAbility(CharacterStateBase characterStateBase, Animator animator)
+    public override void OnEnter(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
+    {
+        
+    }
+
+    public override void UpdateAbility(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
     {
         if (VirtualInputManager.Instance.MoveLeft)
         {
@@ -17,5 +22,10 @@ public class Idle : StateData
         {
             animator.SetBool(TransitionParameter.Move.ToString(), true);
         }
+    }
+
+    public override void OnExit(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
+    {
+        
     }
 }

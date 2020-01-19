@@ -16,6 +16,7 @@ public class CharacterControl : MonoBehaviour
     public Material material;
     public bool MoveRight;
     public bool MoveLeft;
+    public bool Jump;
         
     void Start()
     {
