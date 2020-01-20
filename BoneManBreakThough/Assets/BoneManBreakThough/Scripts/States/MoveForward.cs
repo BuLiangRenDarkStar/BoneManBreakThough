@@ -7,6 +7,8 @@ using UnityEngine;
 public class MoveForward : StateData
 {
     public float Speed;
+    public AnimationCurve SpeedGraph;
+    public float BlockDistance;
 
     public override void OnEnter(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
     {
@@ -16,6 +18,11 @@ public class MoveForward : StateData
     public override void UpdateAbility(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
     {
         CharacterControl characterControl = characterStateBase.GetCharacterControl(animator);
+
+        if( characterControl.Jump )
+        {
+            animator.SetBool( TransitionParameter.Jump.ToString(), true );
+        }
 
         if (characterControl.MoveRight && characterControl.MoveLeft)
         {

@@ -9,7 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af18e930e5e2334478ece1b44445649a, type: 3}
-  m_Name: ForceTransition
+  m_Script: {fileID: 11500000, guid: 7bec793c9c2eca640a63e77a427e0455, type: 3}
+  m_Name: Jump_MoveForward
   m_EditorClassIdentifier: 
-  TransitionTiming: 0.8
+  Speed: 5
+  SpeedGraph:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BlockDistance: 0
