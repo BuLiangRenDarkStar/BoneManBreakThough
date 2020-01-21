@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bec793c9c2eca640a63e77a427e0455, type: 3}
-  m_Name: MoveForward
+  m_Name: Falling Idle
   m_EditorClassIdentifier: 
-  Speed: 1.8
+  Speed: 0
   SpeedGraph:
     serializedVersion: 2
     m_Curve:
@@ -27,7 +27,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -37,4 +37,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BlockDistance: 0.1
+  BlockDistance: 0

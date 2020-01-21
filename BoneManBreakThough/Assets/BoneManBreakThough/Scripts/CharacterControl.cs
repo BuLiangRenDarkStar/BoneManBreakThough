@@ -23,8 +23,13 @@ public class CharacterControl : MonoBehaviour
     public GameObject ColliderEdgePrefab;
     public List<GameObject> BottomSpheres = new List<GameObject>();//Box碰撞框底部四个点
     public List<GameObject> FrontSpheres = new List<GameObject>();//Box前面的点
+    List<Collider> RagdollParts = new List<Collider>();
+
+    public float GravityMultiplier;
+    public float PullMultiplier;
 
     private Rigidbody rigid;
+   
     public Rigidbody RIGID_BODY
     {
         get
@@ -38,6 +43,25 @@ public class CharacterControl : MonoBehaviour
     }
 
     private void Awake()
+    {
+        SetColliderSpheres(  );
+        SetRagdollParts(  );
+    }
+
+    private void SetRagdollParts()
+    {
+        Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>();
+
+        for( int i=0; i<colliders.Length; ++i)
+        {
+            if( colliders[i].gameObject != this.gameObject)
+            {
+                colliders[i].isTrigger = true;
+                RagdollParts.Add(colliders[i]);
+            }
+        }
+    }
+    private void SetColliderSpheres()
     {
         BoxCollider box = GetComponent<BoxCollider>();
 
@@ -56,7 +80,7 @@ public class CharacterControl : MonoBehaviour
 
         BottomSpheres.Add(bottomFront);
         BottomSpheres.Add(bottomBack);
-      
+
         FrontSpheres.Add(bottomFront);
         FrontSpheres.Add(topFront);
 
@@ -100,6 +124,19 @@ public class CharacterControl : MonoBehaviour
             {
                 renderArrary[i].material = material;
             }            
+        }
+    }
+   
+    private void FixedUpdate()
+    {
+        if( RIGID_BODY.velocity.y<0f)
+        {
+            RIGID_BODY.velocity += (-Vector3.up * GravityMultiplier);
+        }
+
+        if( RIGID_BODY.velocity.y>0 && !Jump)
+        {
+            RIGID_BODY.velocity += (-Vector3.up * PullMultiplier);
         }
     }
 }
