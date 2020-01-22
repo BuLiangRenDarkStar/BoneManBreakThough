@@ -14,7 +14,8 @@ public class ForceTransition : StateData
     }
 
     public override void UpdateAbility(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
-    {        
+    {
+        //Debug.Log("ForceTransition");
         if( stateInfo.normalizedTime > TransitionTiming)
         {
             animator.SetBool(TransitionParameter.ForceTransition.ToString(), true);

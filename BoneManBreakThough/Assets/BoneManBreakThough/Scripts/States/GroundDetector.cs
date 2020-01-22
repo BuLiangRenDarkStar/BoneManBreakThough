@@ -39,27 +39,25 @@ public class GroundDetector : StateData
     //按照一定步长添加角色底部位置，检测那些位置是否与地面的距离
     bool IsGrounded( CharacterControl characterControl)
     {
-        if( characterControl.RIGID_BODY.velocity.y>-0.2f && characterControl.RIGID_BODY.velocity.y<=0f)
+        if( characterControl.RIGID_BODY.velocity.y>-0.01f && characterControl.RIGID_BODY.velocity.y<=0f)
         {
-            Debug.Log("速度为0");
             return true;
         }
 
-        if( characterControl.RIGID_BODY.velocity.y<0f )
-        {
+        if (characterControl.RIGID_BODY.velocity.y <= 0f)
+        {            
             for (int i = 0; i < characterControl.BottomSpheres.Count; ++i)
             {
                 GameObject bottomSphere = characterControl.BottomSpheres[i];
-                Debug.DrawRay(bottomSphere.transform.position, -Vector3.up, Color.red);
+                Debug.DrawRay( bottomSphere.transform.position, -Vector3.up, Color.red ); 
                 RaycastHit hit;
-                if (Physics.Raycast(bottomSphere.transform.position, -Vector3.up, out hit, Distance))
-                {
-                    //Debug.Log("接近地面");
+                if ( Physics.Raycast(bottomSphere.transform.position, -Vector3.up, out hit, Distance) )
+                {                    
                     return true;
                 }
+
             }
         }
-       
         return false;
     }
 }

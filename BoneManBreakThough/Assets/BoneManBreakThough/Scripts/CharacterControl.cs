@@ -65,7 +65,7 @@ public class CharacterControl : MonoBehaviour
     {
         BoxCollider box = GetComponent<BoxCollider>();
 
-        float bottom = box.bounds.center.y - box.bounds.extents.y;
+        float bottom = box.bounds.center.y - box.bounds.extents.y+0.005f;
         float top = box.bounds.center.y + box.bounds.extents.y;
         float front = box.bounds.center.z + box.bounds.extents.z;
         float back = box.bounds.center.z - box.bounds.extents.z;
@@ -123,7 +123,7 @@ public class CharacterControl : MonoBehaviour
             if( renderArrary[i].gameObject != this.gameObject)
             {
                 renderArrary[i].material = material;
-            }            
+            }
         }
     }
    

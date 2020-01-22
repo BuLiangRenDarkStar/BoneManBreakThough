@@ -17,6 +17,7 @@ public class MoveForward : StateData
 
     public override void UpdateAbility(CharacterStateBase characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
     {
+        //Debug.Log("MoveForward");
         CharacterControl characterControl = characterStateBase.GetCharacterControl(animator);
 
         if( characterControl.Jump )
