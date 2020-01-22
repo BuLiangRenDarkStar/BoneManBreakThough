@@ -23,7 +23,7 @@ public class CharacterControl : MonoBehaviour
     public GameObject ColliderEdgePrefab;
     public List<GameObject> BottomSpheres = new List<GameObject>();//Box碰撞框底部四个点
     public List<GameObject> FrontSpheres = new List<GameObject>();//Box前面的点
-    List<Collider> RagdollParts = new List<Collider>();
+    public List<Collider> RagdollParts = new List<Collider>();
 
     public float GravityMultiplier;
     public float PullMultiplier;
@@ -44,8 +44,8 @@ public class CharacterControl : MonoBehaviour
 
     private void Awake()
     {
+        SetRagdollParts();//先获取布娃娃系统上的collider
         SetColliderSpheres(  );
-        SetRagdollParts(  );
     }
 
     private void SetRagdollParts()
@@ -61,6 +61,31 @@ public class CharacterControl : MonoBehaviour
             }
         }
     }
+
+    //开启布娃娃系统
+    public void TurnOnRagdoll()
+    {
+        RIGID_BODY.useGravity = false;//需要关闭根节点重力系统
+        RIGID_BODY.velocity = Vector3.zero;
+        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        animator.enabled = false;
+        animator.avatar = null;
+
+        for ( int i=0; i<RagdollParts.Count; ++i)
+        {
+            RagdollParts[i].isTrigger = false;           
+            RagdollParts[i].attachedRigidbody.velocity = Vector3.zero;
+        }
+    }
+
+    //private IEnumerator Start()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    //RIGID_BODY.AddForce(200f * Vector3.up);
+    //    yield return new WaitForSeconds(0.5f);
+    //    TurnOnRagdoll();
+    //}
+
     private void SetColliderSpheres()
     {
         BoxCollider box = GetComponent<BoxCollider>();
