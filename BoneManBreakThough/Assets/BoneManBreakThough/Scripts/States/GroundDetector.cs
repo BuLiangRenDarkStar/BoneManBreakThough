@@ -52,8 +52,9 @@ public class GroundDetector : StateData
                 Debug.DrawRay( bottomSphere.transform.position, -Vector3.up, Color.red ); 
                 RaycastHit hit;
                 if ( Physics.Raycast(bottomSphere.transform.position, -Vector3.up, out hit, Distance) )
-                {                    
-                    return true;
+                {                
+                    if( !characterControl.RagdollParts.Contains( hit.collider )  )
+                        return true;
                 }
 
             }

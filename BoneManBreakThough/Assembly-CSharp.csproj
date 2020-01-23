@@ -64,11 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BoneManBreakThough\Scripts\BaseScript\CharacterStateBase.cs" />
+    <Compile Include="Assets\BoneManBreakThough\Scripts\BaseScript\Singleton.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\BaseScript\StateData.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\CharacterControl.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\KeyboardInput.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\ManualInput.cs" />
-    <Compile Include="Assets\BoneManBreakThough\Scripts\Singleton.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\States\ForceTransition.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\States\GroundDetector.cs" />
     <Compile Include="Assets\BoneManBreakThough\Scripts\States\Idle.cs" />

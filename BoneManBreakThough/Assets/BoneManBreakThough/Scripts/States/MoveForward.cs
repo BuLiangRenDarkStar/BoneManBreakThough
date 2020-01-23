@@ -63,14 +63,20 @@ public class MoveForward : StateData
 
     bool CheckFront( CharacterControl characterControl )
     {
-        for(int i=0; i<characterControl.FrontSpheres.Count; ++i)
+        for (int i=0; i<characterControl.FrontSpheres.Count; ++i)
         {           
             GameObject frontSphere = characterControl.FrontSpheres[i];
             Debug.DrawRay(frontSphere.transform.position, frontSphere.transform.forward, Color.blue);
             RaycastHit hit;
             if( Physics.Raycast( frontSphere.transform.position, frontSphere.transform.forward, out hit, BlockDistance ))
             {
-                return true;
+                if (!characterControl.RagdollParts.Contains(hit.collider))//射线投射不能投射到自身碰撞框
+                {
+                    Debug.DrawRay(frontSphere.transform.position, frontSphere.transform.forward * BlockDistance, Color.red);
+                    Debug.Log("CheckFront true");
+                    return true;
+                }
+               
             }
         }
         return false;

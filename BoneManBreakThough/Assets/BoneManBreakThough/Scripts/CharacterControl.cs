@@ -101,7 +101,7 @@ public class CharacterControl : MonoBehaviour
 
         topFront.transform.parent = transform;
         bottomFront.transform.parent = transform;
-        bottomBack.transform.parent = transform;
+       bottomBack.transform.parent = transform;
 
         BottomSpheres.Add(bottomFront);
         BottomSpheres.Add(bottomBack);
