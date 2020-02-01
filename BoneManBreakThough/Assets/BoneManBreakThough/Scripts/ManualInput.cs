@@ -13,7 +13,7 @@ public class ManualInput : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        if ( VirtualInputManager.Instance.MoveRight )
         {
             characterControl.MoveRight = true;
         }
@@ -22,7 +22,7 @@ public class ManualInput : MonoBehaviour
             characterControl.MoveRight = false;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if ( VirtualInputManager.Instance.MoveLeft )
         {
             characterControl.MoveLeft = true;
         }
@@ -31,13 +31,22 @@ public class ManualInput : MonoBehaviour
             characterControl.MoveLeft = false;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if ( VirtualInputManager.Instance.Jump )
         {
             characterControl.Jump = true;
         }
         else
         {
             characterControl.Jump = false;
+        }
+
+        if( VirtualInputManager.Instance.Attack)
+        {
+            characterControl.Attack = true;
+        }
+        else
+        {
+            characterControl.Attack = false;
         }
     }
 

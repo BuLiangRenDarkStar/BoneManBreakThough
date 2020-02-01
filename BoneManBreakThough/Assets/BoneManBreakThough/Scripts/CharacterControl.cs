@@ -9,21 +9,24 @@ public enum TransitionParameter
     Jump,
     ForceTransition,
     Grounded,
+    Attack,
 }
 
 
 public class CharacterControl : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public Animator animator;
+    public Animator SkinnedMeshAnimator;
     public Material material;
     public bool MoveRight;
     public bool MoveLeft;
     public bool Jump;
+    public bool Attack;
+
     public GameObject ColliderEdgePrefab;
     public List<GameObject> BottomSpheres = new List<GameObject>();//Box碰撞框底部四个点
     public List<GameObject> FrontSpheres = new List<GameObject>();//Box前面的点
     public List<Collider> RagdollParts = new List<Collider>();
+    public List<Collider> CollidingParts = new List<Collider>();
 
     public float GravityMultiplier;
     public float PullMultiplier;
@@ -44,8 +47,19 @@ public class CharacterControl : MonoBehaviour
 
     private void Awake()
     {
+        bool SwitchBack = false;
+
+        if (!IsFacingForward())
+        {
+            SwitchBack = true;
+        }
+
         SetRagdollParts();//先获取布娃娃系统上的collider
         SetColliderSpheres(  );
+        if (SwitchBack)
+        {
+            FaceForward(false);
+        }
     }
 
     private void SetRagdollParts()
@@ -68,8 +82,8 @@ public class CharacterControl : MonoBehaviour
         RIGID_BODY.useGravity = false;//需要关闭根节点重力系统
         RIGID_BODY.velocity = Vector3.zero;
         this.gameObject.GetComponent<BoxCollider>().enabled = false;
-        animator.enabled = false;
-        animator.avatar = null;
+        SkinnedMeshAnimator.enabled = false;
+        //animator.avatar = null;
 
         for ( int i=0; i<RagdollParts.Count; ++i)
         {
@@ -86,6 +100,40 @@ public class CharacterControl : MonoBehaviour
     //    TurnOnRagdoll();
     //}
 
+    //检测除自身子节点外的触发器有无其他触发器 与该节点碰撞器接触
+    private void OnTriggerEnter(Collider col)
+    {
+        
+        if (RagdollParts.Contains(col))
+            return;
+
+        CharacterControl characterControl = col.transform.root.GetComponent<CharacterControl>();
+
+        if( null==characterControl )
+        {
+            return;
+        }
+
+        if( col.gameObject == characterControl.gameObject )
+        {
+            Debug.Log( "this GameObject" + gameObject.name + "col GameObject" + col.gameObject.name);
+            return;
+        }
+
+        if( !CollidingParts.Contains(col) )
+        {
+            CollidingParts.Add(col);
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if( CollidingParts.Contains(col))
+        {
+            CollidingParts.Remove(col);
+        }
+    }
+
     private void SetColliderSpheres()
     {
         BoxCollider box = GetComponent<BoxCollider>();
@@ -101,7 +149,7 @@ public class CharacterControl : MonoBehaviour
 
         topFront.transform.parent = transform;
         bottomFront.transform.parent = transform;
-       bottomBack.transform.parent = transform;
+        bottomBack.transform.parent = transform;
 
         BottomSpheres.Add(bottomFront);
         BottomSpheres.Add(bottomBack);
@@ -132,6 +180,35 @@ public class CharacterControl : MonoBehaviour
     {
         GameObject obj = Instantiate(ColliderEdgePrefab, pos, Quaternion.identity);
         return obj;
+    }
+
+    public void MoveForward( float Speed, float SpeedGraph )
+    {
+        transform.Translate(Vector3.forward * Speed * SpeedGraph * Time.deltaTime);
+    }
+
+    public void FaceForward( bool forward )
+    {
+        if( forward)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+    }
+
+    public bool IsFacingForward()
+    {
+        if (transform.forward.z > 0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void ChangeMaterial()
